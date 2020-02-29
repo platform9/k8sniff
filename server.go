@@ -461,6 +461,7 @@ func (p *Proxy) Handle(conn *net.TCPConn, connectionID string) {
 	clientConn := clientCnx.(*net.TCPConn)
 	proxyIngressBackend := fmt.Sprintf("%s:%d", proxy.IngressName, proxy.Port)
 	metrics.IncBackendConnections(proxyIngressBackend)
+	glog.V(3).Infof("[%s] Connected to backend", connectionID)
 
 	defer func() {
 		err := clientConn.Close()
